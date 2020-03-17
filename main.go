@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
-	"./config"
-	"./bot"
+	"ajbot/config"
+	"ajbot/bot"
+
+	"ajbot/funcs"
 )
 
 func main() {
@@ -15,6 +17,16 @@ func main() {
 	}
 
 	bot.Start()
+
+
+	rss, err := funcs.ReadRSSFeed("https://www.reddit.com/r/CoronavirusDownunder.rss")
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
+
+	fmt.Println(rss)
 
 	<-make(chan struct{})
 	return

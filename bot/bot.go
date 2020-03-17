@@ -1,13 +1,16 @@
 package bot
 
 import (
-	"../config"
+	"ajbot/config"
 	"fmt"
+	"strings"
+
 	"github.com/bwmarrin/discordgo"
 )
 
 var BotID string
 var goBot *discordgo.Session
+
 
 func Start() {
 	goBot, err := discordgo.New("Bot "+ config.Token)
@@ -39,10 +42,9 @@ func Start() {
 	// <-make(chan struct{})
 	// return
 
-
 }
 
-
+// reponds based of chat
 func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	if strings.HasPrefix(m.Content, config.BotPrefix) {
@@ -54,9 +56,17 @@ func messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 		if m.Content == "!ping" {
 			_, _ = s.ChannelMessageSend(m.ChannelID, "pong")
 		}
+
+		if m.Content == "!hiphip" {
+			_, _ = s.ChannelMessageSend(m.ChannelID, "hurray")
+		}
 		
 	}
+	fmt.Println(m.Content)
+}
+
 	
 
-	// fmt.Println(m.Content)
-}
+
+
+
